@@ -28,12 +28,12 @@ pipeline {
       steps {
         script {
           def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist"
-          def deployPath = "/var/www/html/angular3200"
-          def nginxConfPath = "/etc/nginx/sites-available/angular3200.conf"
+          def deployPath = "/var/www/html/angular2010"
+          def nginxConfPath = "/etc/nginx/sites-available/angular2010.conf"
 
           sh """
-            echo "🛑 Killing process on port 3200 if it exists..."
-            fuser -k 3200/tcp || true
+            echo "🛑 Killing process on port 2010 if it exists..."
+            fuser -k 2010/tcp || true
 
             echo "🚚 Deploying Angular App to ${deployPath}..."
             sudo mkdir -p ${deployPath}
@@ -43,10 +43,10 @@ pipeline {
             sudo chmod -R 755 ${deployPath}
 
             if [ ! -f ${nginxConfPath} ]; then
-              echo "🔧 Creating Nginx config for port 3200..."
+              echo "🔧 Creating Nginx config for port 2010..."
               cat <<EOF | sudo tee ${nginxConfPath}
 server {
-    listen 3200;
+    listen 2010;
     server_name localhost;
 
     root ${deployPath};
@@ -70,7 +70,7 @@ EOF
               sudo systemctl start nginx
             fi
 
-            echo "✅ Deployment complete on port 3200"
+            echo "✅ Deployment complete on port 2010"
           """
         }
       }
