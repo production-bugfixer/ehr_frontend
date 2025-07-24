@@ -1,73 +1,45 @@
 pipeline {
-    agent any
+  agent any
 
-    environment {
-        NODE_OPTIONS = "--max-old-space-size=4096"
-        ANGULAR_DIR = 'ehr-frontend'
-        BUILD_DIR = 'dist/ehr-frontend'
-        DEPLOY_DIR = '/var/www/ehr-frontend'
+  tools {
+    nodejs 'nodejs14'  // <- name must match what you configured above
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
     }
 
-    stages {
-        stage('Checkout Code') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Install & Build Angular App') {
-            steps {
-                dir("${ANGULAR_DIR}") {
-                    sh 'npm install'
-                    sh 'npm run build --prod'
-                }
-            }
-        }
-
-        stage('Copy to Deployment Directory') {
-            steps {
-                sh 'sudo mkdir -p ${DEPLOY_DIR}'
-                sh 'sudo cp -r ${ANGULAR_DIR}/${BUILD_DIR}/* ${DEPLOY_DIR}/'
-            }
-        }
-
-        stage('Configure Nginx for Port 3200') {
-            steps {
-                script {
-                    def nginxConf = """
-                    server {
-                        listen 3200;
-                        server_name _;
-                        root ${DEPLOY_DIR};
-                        index index.html index.htm;
-
-                        location / {
-                            try_files \$uri \$uri/ /index.html;
-                        }
-                    }
-                    """
-                    writeFile file: 'ehr-frontend-3200.conf', text: nginxConf
-                    sh 'sudo mv ehr-frontend-3200.conf /etc/nginx/sites-available/ehr-frontend'
-                    sh 'sudo ln -sf /etc/nginx/sites-available/ehr-frontend /etc/nginx/sites-enabled/'
-                    sh 'sudo nginx -t'
-                    sh 'sudo systemctl reload nginx'
-                }
-            }
-        }
-
-        stage('Allow Port 3200') {
-            steps {
-                sh 'sudo ufw allow 3200 || true'
-            }
-        }
+    stage('Install') {
+      steps {
+        sh 'npm install'
+      }
     }
+    stage('Build') {
+  steps {
+    sh 'npm run build -- --output-path=dist'
+  }
+}
+stage('Deploy to Nginx') {
+  steps {
+    script {
+      def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist/EHRwebView"
+      def deployPath = "/var/www/html"
 
-    post {
-        success {
-            echo '✅ Angular app deployed at http://<your-server-ip>:3200/'
-        }
-        failure {
-            echo '❌ Deployment failed'
-        }
+      sh """
+        echo "Deploying Angular App to Nginx..."
+        sudo rm -rf ${deployPath}/*
+        sudo cp -r ${ngBuildPath}/* ${deployPath}/
+        sudo chown -R www-data:www-data ${deployPath}
+        sudo chmod -R 755 ${deployPath}
+        sudo systemctl restart nginx
+      """
     }
+  }
+}
+
+  }
+  
 }
