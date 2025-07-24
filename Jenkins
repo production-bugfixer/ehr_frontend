@@ -17,11 +17,29 @@ pipeline {
         sh 'npm install'
       }
     }
-
     stage('Build') {
-      steps {
-        sh 'npm run build'
-      }
+  steps {
+    sh 'npm run build -- --output-path=dist'
+  }
+}
+stage('Deploy to Nginx') {
+  steps {
+    script {
+      def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist/EHRwebView"
+      def deployPath = "/var/www/html"
+
+      sh """
+        echo "Deploying Angular App to Nginx..."
+        sudo rm -rf ${deployPath}/*
+        sudo cp -r ${ngBuildPath}/* ${deployPath}/
+        sudo chown -R www-data:www-data ${deployPath}
+        sudo chmod -R 755 ${deployPath}
+        sudo systemctl restart nginx
+      """
     }
   }
+}
+
+  }
+  
 }
