@@ -1,15 +1,27 @@
 pipeline {
-    agent any
-    stages {
-        stage('Install') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
-        }
+  agent any
+
+  tools {
+    nodejs 'nodejs14'  // <- name must match what you configured above
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
     }
+
+    stage('Install') {
+      steps {
+        sh 'npm install'
+      }
+    }
+
+    stage('Build') {
+      steps {
+        sh 'npm run build'
+      }
+    }
+  }
 }
