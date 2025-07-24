@@ -4,7 +4,6 @@ pipeline {
   tools {
     nodejs 'nodejs14'  // <- name must match what you configured above
   }
-
   stages {
     stage('Checkout') {
       steps {
@@ -17,61 +16,56 @@ pipeline {
         sh 'npm install'
       }
     }
+
     stage('Build') {
-  steps {
-    sh 'npm run build -- --output-path=dist'
-  }
-}
-stage('Deploy to Nginx') {
-  steps {
-    script {
-      def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist"
-      def deployPath = "/var/www/html"
+      steps {
+        sh 'npm run build -- --output-path=dist'
+      }
+    }
 
-      sh """
-        echo "Deploying Angular App to Nginx..."
+    stage('Deploy to Nginx on Port 3200') {
+      steps {
+        script {
+          def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist"
+          def deployPath = "/var/www/html/angular3200"
 
-        # Copy build
-        sudo rm -rf ${deployPath}/*
-        sudo cp -r ${ngBuildPath}/* ${deployPath}/
-        sudo chown -R www-data:www-data ${deployPath}
-        sudo chmod -R 755 ${deployPath}
+          sh """
+            echo "Deploying Angular App to Nginx on port 3200..."
 
-        # Setup Nginx config for port 3200 if not exists
-        if [ ! -f /etc/nginx/sites-available/angular3200.conf ]; then
-          echo "Creating Nginx config for port 3200..."
-          sudo bash -c 'cat > /etc/nginx/sites-available/angular3200.conf' <<EOF
+            # Create target directory if not exists
+            sudo mkdir -p ${deployPath}
+
+            # Clean previous files
+            sudo rm -rf ${deployPath}/*
+            sudo cp -r ${ngBuildPath}/* ${deployPath}/
+            sudo chown -R www-data:www-data ${deployPath}
+            sudo chmod -R 755 ${deployPath}
+
+            # Create nginx config if not already there
+            if [ ! -f /etc/nginx/sites-available/angular3200.conf ]; then
+              echo "Creating Nginx config for port 3200..."
+              sudo bash -c 'cat > /etc/nginx/sites-available/angular3200.conf <<EOF
 server {
     listen 3200;
     server_name localhost;
 
-    root /var/www/html;
+    root ${deployPath};
     index index.html index.htm;
 
     location / {
         try_files \$uri \$uri/ /index.html;
     }
 }
-EOF
-          sudo ln -s /etc/nginx/sites-available/angular3200.conf /etc/nginx/sites-enabled/angular3200.conf || true
-        fi
+EOF'
+              sudo ln -s /etc/nginx/sites-available/angular3200.conf /etc/nginx/sites-enabled/angular3200.conf || true
+            fi
 
-        # Allow port 3200 through firewall
-        if command -v ufw >/dev/null 2>&1; then
-          sudo ufw allow 3200 || true
-        elif command -v firewall-cmd >/dev/null 2>&1; then
-          sudo firewall-cmd --permanent --add-port=3200/tcp || true
-          sudo firewall-cmd --reload || true
-        fi
-
-        # Restart nginx
-        sudo systemctl restart nginx
-      """
+            # Reload Nginx
+            echo "Reloading Nginx..."
+            sudo nginx -t && sudo systemctl reload nginx
+          """
+        }
+      }
     }
   }
-}
-
-
-  }
-  
 }
