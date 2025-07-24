@@ -30,10 +30,14 @@ pipeline {
           def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist"
           def deployPath = "/var/www/html/angular2010"
           def nginxConfPath = "/etc/nginx/sites-available/angular2010.conf"
+          def nginxEnabledPath = "/etc/nginx/sites-enabled/angular2010.conf"
 
           sh """
+            echo "🛡️ Allowing port 2010 via UFW..."
+            sudo ufw allow 2010/tcp || true
+
             echo "🛑 Killing process on port 2010 if it exists..."
-            fuser -k 2010/tcp || true
+            sudo fuser -k 2010/tcp || true
 
             echo "🚚 Deploying Angular App to ${deployPath}..."
             sudo mkdir -p ${deployPath}
@@ -57,7 +61,10 @@ server {
     }
 }
 EOF
-              sudo ln -s ${nginxConfPath} /etc/nginx/sites-enabled/
+            fi
+
+            if [ ! -L ${nginxEnabledPath} ]; then
+              sudo ln -s ${nginxConfPath} ${nginxEnabledPath}
             fi
 
             echo "🧪 Testing Nginx config..."
@@ -70,7 +77,7 @@ EOF
               sudo systemctl start nginx
             fi
 
-            echo "✅ Deployment complete on port 2010"
+            echo "✅ Deployment complete and accessible at http://<server-ip>:2010/"
           """
         }
       }
