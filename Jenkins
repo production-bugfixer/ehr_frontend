@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'nodejs14'  // <- name must match what you configured above
+    nodejs 'nodejs14'
   }
 
   stages {
@@ -30,26 +30,21 @@ pipeline {
           def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist"
           def deployPath = "/var/www/html/angular3200"
           def nginxConfPath = "/etc/nginx/sites-available/angular3200.conf"
-          def nginxLinkPath = "/etc/nginx/sites-enabled/angular3200.conf"
 
           sh """
-            echo "Deploying Angular App to Nginx (port 3200)..."
+            echo "🛑 Killing process on port 3200 if it exists..."
+            fuser -k 3200/tcp || true
 
-            # Create deployment directory
+            echo "🚚 Deploying Angular App to ${deployPath}..."
             sudo mkdir -p ${deployPath}
-
-            # Copy build files
             sudo rm -rf ${deployPath}/*
             sudo cp -r ${ngBuildPath}/* ${deployPath}/
-
-            # Set permissions
             sudo chown -R www-data:www-data ${deployPath}
             sudo chmod -R 755 ${deployPath}
 
-            # Create Nginx config if not exists
             if [ ! -f ${nginxConfPath} ]; then
-              echo "Creating Nginx config for port 3200..."
-              sudo bash -c 'cat > ${nginxConfPath}' <<EOF
+              echo "🔧 Creating Nginx config for port 3200..."
+              cat <<EOF | sudo tee ${nginxConfPath}
 server {
     listen 3200;
     server_name localhost;
@@ -62,19 +57,20 @@ server {
     }
 }
 EOF
-              sudo ln -s ${nginxConfPath} ${nginxLinkPath}
+              sudo ln -s ${nginxConfPath} /etc/nginx/sites-enabled/
             fi
 
-            # Reload or start Nginx
-            echo "Validating Nginx config..."
+            echo "🧪 Testing Nginx config..."
             sudo nginx -t
+
+            echo "🔁 Reloading or Starting Nginx..."
             if systemctl is-active --quiet nginx; then
-              echo "Reloading Nginx..."
               sudo systemctl reload nginx
             else
-              echo "Starting Nginx (was not active)..."
               sudo systemctl start nginx
             fi
+
+            echo "✅ Deployment complete on port 3200"
           """
         }
       }
