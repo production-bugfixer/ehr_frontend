@@ -2,80 +2,72 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_NAME = "ehr-frontend"  // Replace with your dist project folder name if different
-        DIST_PATH = "/var/lib/jenkins/workspace/ehr-frontend/dist"
-        DEPLOY_PATH = "/var/www/angular-3200"
-        NGINX_SITE = "/etc/nginx/sites-available/angular-3200"
+        NODE_OPTIONS = "--max-old-space-size=4096"
+        ANGULAR_DIR = 'ehr-frontend'
+        BUILD_DIR = 'dist/ehr-frontend'
+        DEPLOY_DIR = '/var/www/ehr-frontend'
     }
 
     stages {
-        stage('Build Angular App') {
+        stage('Checkout Code') {
             steps {
-                dir('ehr-frontend') {
+                checkout scm
+            }
+        }
+
+        stage('Install & Build Angular App') {
+            steps {
+                dir("${ANGULAR_DIR}") {
                     sh 'npm install'
-                    sh 'ng build --configuration production'
+                    sh 'npm run build --prod'
                 }
             }
         }
 
-        stage('Copy to Nginx Directory') {
+        stage('Copy to Deployment Directory') {
+            steps {
+                sh 'sudo mkdir -p ${DEPLOY_DIR}'
+                sh 'sudo cp -r ${ANGULAR_DIR}/${BUILD_DIR}/* ${DEPLOY_DIR}/'
+            }
+        }
+
+        stage('Configure Nginx for Port 3200') {
             steps {
                 script {
-                    sh '''
-                        sudo mkdir -p ${DEPLOY_PATH}
-                        sudo cp -r ${DIST_PATH}/* ${DEPLOY_PATH}/
-                        sudo chown -R www-data:www-data ${DEPLOY_PATH}
-                        sudo chmod -R 755 ${DEPLOY_PATH}
-                    '''
+                    def nginxConf = """
+                    server {
+                        listen 3200;
+                        server_name _;
+                        root ${DEPLOY_DIR};
+                        index index.html index.htm;
+
+                        location / {
+                            try_files \$uri \$uri/ /index.html;
+                        }
+                    }
+                    """
+                    writeFile file: 'ehr-frontend-3200.conf', text: nginxConf
+                    sh 'sudo mv ehr-frontend-3200.conf /etc/nginx/sites-available/ehr-frontend'
+                    sh 'sudo ln -sf /etc/nginx/sites-available/ehr-frontend /etc/nginx/sites-enabled/'
+                    sh 'sudo nginx -t'
+                    sh 'sudo systemctl reload nginx'
                 }
             }
         }
 
-        stage('Setup Nginx for Port 3200') {
+        stage('Allow Port 3200') {
             steps {
-                script {
-                    sh '''
-                        cat <<EOF | sudo tee ${NGINX_SITE}
-server {
-    listen 3200;
-    server_name _;
-
-    root ${DEPLOY_PATH};
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-EOF
-
-                        # Enable site if not already linked
-                        if [ ! -f "/etc/nginx/sites-enabled/angular-3200" ]; then
-                            sudo ln -s ${NGINX_SITE} /etc/nginx/sites-enabled/angular-3200
-                        fi
-
-                        # Check and restart nginx
-                        sudo nginx -t && sudo systemctl restart nginx
-                    '''
-                }
-            }
-        }
-
-        stage('Allow Port 3200 in Firewall') {
-            steps {
-                sh '''
-                    sudo ufw allow 3200 || true
-                '''
+                sh 'sudo ufw allow 3200 || true'
             }
         }
     }
 
     post {
         success {
-            echo "✅ Angular app deployed at http://<your-server-ip>:3200"
+            echo '✅ Angular app deployed at http://<your-server-ip>:3200/'
         }
         failure {
-            echo "❌ Deployment failed"
+            echo '❌ Deployment failed'
         }
     }
 }
