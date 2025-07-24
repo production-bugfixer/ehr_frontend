@@ -4,6 +4,7 @@ pipeline {
   tools {
     nodejs 'nodejs14'  // <- name must match what you configured above
   }
+
   stages {
     stage('Checkout') {
       steps {
@@ -23,46 +24,57 @@ pipeline {
       }
     }
 
-    stage('Deploy to Nginx on Port 3200') {
+    stage('Deploy to Nginx') {
       steps {
         script {
           def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist"
           def deployPath = "/var/www/html/angular3200"
+          def nginxConfPath = "/etc/nginx/sites-available/angular3200.conf"
+          def nginxLinkPath = "/etc/nginx/sites-enabled/angular3200.conf"
 
           sh """
-            echo "Deploying Angular App to Nginx on port 3200..."
+            echo "Deploying Angular App to Nginx (port 3200)..."
 
-            # Create target directory if not exists
+            # Create deployment directory
             sudo mkdir -p ${deployPath}
 
-            # Clean previous files
+            # Copy build files
             sudo rm -rf ${deployPath}/*
             sudo cp -r ${ngBuildPath}/* ${deployPath}/
+
+            # Set permissions
             sudo chown -R www-data:www-data ${deployPath}
             sudo chmod -R 755 ${deployPath}
 
-            # Create nginx config if not already there
-            if [ ! -f /etc/nginx/sites-available/angular3200.conf ]; then
+            # Create Nginx config if not exists
+            if [ ! -f ${nginxConfPath} ]; then
               echo "Creating Nginx config for port 3200..."
-              sudo bash -c 'cat > /etc/nginx/sites-available/angular3200.conf <<EOF
+              sudo bash -c 'cat > ${nginxConfPath}' <<EOF
 server {
     listen 3200;
     server_name localhost;
 
     root ${deployPath};
-    index index.html index.htm;
+    index index.html;
 
     location / {
         try_files \$uri \$uri/ /index.html;
     }
 }
-EOF'
-              sudo ln -s /etc/nginx/sites-available/angular3200.conf /etc/nginx/sites-enabled/angular3200.conf || true
+EOF
+              sudo ln -s ${nginxConfPath} ${nginxLinkPath}
             fi
 
-            # Reload Nginx
-            echo "Reloading Nginx..."
-            sudo nginx -t && sudo systemctl reload nginx
+            # Reload or start Nginx
+            echo "Validating Nginx config..."
+            sudo nginx -t
+            if systemctl is-active --quiet nginx; then
+              echo "Reloading Nginx..."
+              sudo systemctl reload nginx
+            else
+              echo "Starting Nginx (was not active)..."
+              sudo systemctl start nginx
+            fi
           """
         }
       }
