@@ -25,20 +25,52 @@ pipeline {
 stage('Deploy to Nginx') {
   steps {
     script {
-      def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist/EHRwebView"
+      def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist"
       def deployPath = "/var/www/html"
 
       sh """
         echo "Deploying Angular App to Nginx..."
+
+        # Copy build
         sudo rm -rf ${deployPath}/*
         sudo cp -r ${ngBuildPath}/* ${deployPath}/
         sudo chown -R www-data:www-data ${deployPath}
         sudo chmod -R 755 ${deployPath}
+
+        # Setup Nginx config for port 3200 if not exists
+        if [ ! -f /etc/nginx/sites-available/angular3200.conf ]; then
+          echo "Creating Nginx config for port 3200..."
+          sudo bash -c 'cat > /etc/nginx/sites-available/angular3200.conf' <<EOF
+server {
+    listen 3200;
+    server_name localhost;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    location / {
+        try_files \$uri \$uri/ /index.html;
+    }
+}
+EOF
+          sudo ln -s /etc/nginx/sites-available/angular3200.conf /etc/nginx/sites-enabled/angular3200.conf || true
+        fi
+
+        # Allow port 3200 through firewall
+        if command -v ufw >/dev/null 2>&1; then
+          sudo ufw allow 3200 || true
+        elif command -v firewall-cmd >/dev/null 2>&1; then
+          sudo firewall-cmd --permanent --add-port=3200/tcp || true
+          sudo firewall-cmd --reload || true
+        fi
+
+        # Restart nginx
         sudo systemctl restart nginx
       """
     }
   }
 }
+
 
   }
   
