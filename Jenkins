@@ -27,7 +27,7 @@ pipeline {
     stage('Deploy to Nginx') {
       steps {
         script {
-          def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist/ehrweb-view"
+          def ngBuildPath = "/var/lib/jenkins/workspace/ehr-frontend/dist"
           def deployPath = "/var/www/html/angular2010"
           def nginxConfPath = "/etc/nginx/sites-available/angular2010.conf"
           def nginxEnabledPath = "/etc/nginx/sites-enabled/angular2010.conf"
