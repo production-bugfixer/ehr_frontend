@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environmentAuth';
 import { Observable, throwError } from 'rxjs';
 
@@ -10,7 +10,6 @@ interface LoginResponse {
     username: string;
     email: string;
     userType: 'DOCTOR';
-    // Add other user properties as needed
   };
 }
 
@@ -30,29 +29,27 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Authenticate a doctor user
-   * @param payload Login credentials
-   * @returns Observable with login response
-   */
-  doctorLogin(payload: LoginPayload): Observable<any> {
-    let url=this.apiUrl+environment.authEndpoints.doctor
-    return this.http.post(url,payload)
+  private getHeaders(): HttpHeaders {
+    const lang = localStorage.getItem('lang') || 'en'; // Default to 'en' if not set
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'lang': lang
+    });
   }
 
-  /**
-   * Handle HTTP errors
-   * @param error HttpErrorResponse
-   * @returns Error observable
-   */
+  doctorLogin(payload: LoginPayload): Observable<LoginResponse> {
+    const url = this.apiUrl + environment.authEndpoints.doctor;
+    return this.http.post<LoginResponse>(url, payload, {
+      headers: this.getHeaders()
+    });
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred';
     
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side error
       if (error.status === 0) {
         errorMessage = 'Unable to connect to server';
       } else if (error.status === 401) {
@@ -68,11 +65,4 @@ export class AuthService {
     
     return throwError(() => new Error(errorMessage));
   }
-
-  // Additional auth methods can be added below
-  // For example:
-  // - logout()
-  // - getCurrentUser()
-  // - isLoggedIn()
-  // - etc.
 }

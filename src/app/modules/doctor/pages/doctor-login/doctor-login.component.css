@@ -18,6 +18,16 @@
   padding: 40px;
   animation: fadeIn 0.5s ease;
 }
+/* Remove the full-page centering */
+.login-page {
+  padding: 20px;
+  padding-top: 80px; /* Make space for navigation */
+  min-height: calc(100vh - 80px); /* Adjust height */
+}
+
+.login-container {
+  margin: 0 auto; /* Center horizontally only */
+}
 
 /* Header styles */
 .login-header {

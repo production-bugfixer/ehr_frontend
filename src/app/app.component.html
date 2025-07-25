@@ -1,1 +1,21 @@
+<nav>
+  <div class="language-selector">
+    <select [(ngModel)]="selectedLanguage" (change)="onLanguageChange()">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी (Hindi)</option>
+      <option value="ar">العربية (Arabic)</option>
+      <option value="es">Español (Spanish)</option>
+      <option value="bn">বাংলা (Bengali)</option>
+      <option value="or">ଓଡ଼ିଆ (Odia)</option>
+    </select>
+  </div>
+
+  <div class="nav-links">
+    <a routerLink="/">Home</a>
+    <a routerLink="/about">About</a>
+    <a routerLink="/services">Services</a>
+    <a routerLink="/contact">Contact</a>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>
