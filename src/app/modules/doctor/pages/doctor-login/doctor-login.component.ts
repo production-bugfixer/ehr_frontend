@@ -67,6 +67,8 @@ export class DoctorLoginComponent implements OnInit {
       error: (error:any) => {
         this.isLoading = false;
         this.errorMessage = error.error?.message || 'Login failed. Please try again.';
+        console.log(error)
+        this.toaster.error(this.errorMessage)
       }
     });
   }
