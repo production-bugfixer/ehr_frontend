@@ -1,0 +1,9 @@
+{
+  "DOCTOR": "طبيب",
+  "NURSING": "تمريض",
+  "PATIENT": "مريض",
+  "PHARMACY": "صيدلية",
+  "ADMINISTRATION": "إدارة",
+  "HEALTH_TECHNICIAN": "فني صحي",
+  "PATHOLOGY": "علم الأمراض"
+}

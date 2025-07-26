@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Portalul Doctorului",
+    "subtitle": "Accesează tabloul tău medical",
+    "doctorId": "ID-ul Doctorului",
+    "password": "Parolă",
+    "placeholder": {
+      "username": "Introduceți ID-ul doctorului",
+      "password": "Introduceți parola"
+    },
+    "errors": {
+      "usernameRequired": "ID-ul doctorului este obligatoriu",
+      "passwordRequired": "Parola este obligatorie"
+    },
+    "button": {
+      "signIn": "Autentificare"
+    },
+    "forgotPassword": "Ți-ai uitat parola?"
+  }
+}

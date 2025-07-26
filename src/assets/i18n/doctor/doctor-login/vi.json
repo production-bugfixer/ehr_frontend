@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Cổng thông tin bác sĩ",
+    "subtitle": "Truy cập bảng điều khiển y tế của bạn",
+    "doctorId": "ID Bác sĩ",
+    "password": "Mật khẩu",
+    "placeholder": {
+      "username": "Nhập ID bác sĩ của bạn",
+      "password": "Nhập mật khẩu của bạn"
+    },
+    "errors": {
+      "usernameRequired": "ID Bác sĩ là bắt buộc",
+      "passwordRequired": "Mật khẩu là bắt buộc"
+    },
+    "button": {
+      "signIn": "Đăng nhập"
+    },
+    "forgotPassword": "Quên mật khẩu?"
+  }
+}

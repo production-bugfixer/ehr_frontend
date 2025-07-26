@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "ਡਾਕਟਰ ਪੋਰਟਲ",
+    "subtitle": "ਆਪਣੀ ਮੈਡੀਕਲ ਡੈਸ਼ਬੋਰਡ 'ਚ ਐਕਸੈਸ ਕਰੋ",
+    "doctorId": "ਡਾਕਟਰ ID",
+    "password": "ਪਾਸਵਰਡ",
+    "placeholder": {
+      "username": "ਆਪਣਾ ਡਾਕਟਰ ID ਦਾਖਲ ਕਰੋ",
+      "password": "ਆਪਣਾ ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ"
+    },
+    "errors": {
+      "usernameRequired": "ਡਾਕਟਰ ID ਲਾਜ਼ਮੀ ਹੈ",
+      "passwordRequired": "ਪਾਸਵਰਡ ਲਾਜ਼ਮੀ ਹੈ"
+    },
+    "button": {
+      "signIn": "ਸਾਈਨ ਇਨ ਕਰੋ"
+    },
+    "forgotPassword": "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ ਹੋ?"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "ડૉક્ટર પોર્ટલ",
+    "subtitle": "તમારું મેડિકલ ડેશબોર્ડ ઍક્સેસ કરો",
+    "doctorId": "ડૉક્ટર આઈડી",
+    "password": "પાસવર્ડ",
+    "placeholder": {
+      "username": "તમારું ડૉક્ટર આઈડી દાખલ કરો",
+      "password": "તમારું પાસવર્ડ દાખલ કરો"
+    },
+    "errors": {
+      "usernameRequired": "ડૉક્ટર આઈડી આવશ્યક છે",
+      "passwordRequired": "પાસવર્ડ આવશ્યક છે"
+    },
+    "button": {
+      "signIn": "સાઇન ઇન કરો"
+    },
+    "forgotPassword": "પાસવર્ડ ભૂલી ગયા છો?"
+  }
+}

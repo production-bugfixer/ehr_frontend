@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "医生门户",
+    "subtitle": "访问您的医疗仪表板",
+    "doctorId": "医生编号",
+    "password": "密码",
+    "placeholder": {
+      "username": "请输入您的医生编号",
+      "password": "请输入您的密码"
+    },
+    "errors": {
+      "usernameRequired": "医生编号是必填项",
+      "passwordRequired": "密码是必填项"
+    },
+    "button": {
+      "signIn": "登录"
+    },
+    "forgotPassword": "忘记密码？"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Ärzteportal",
+    "subtitle": "Zugriff auf Ihr medizinisches Dashboard",
+    "doctorId": "Arzt-ID",
+    "password": "Passwort",
+    "placeholder": {
+      "username": "Geben Sie Ihre Arzt-ID ein",
+      "password": "Geben Sie Ihr Passwort ein"
+    },
+    "errors": {
+      "usernameRequired": "Arzt-ID ist erforderlich",
+      "passwordRequired": "Passwort ist erforderlich"
+    },
+    "button": {
+      "signIn": "Anmelden"
+    },
+    "forgotPassword": "Passwort vergessen?"
+  }
+}

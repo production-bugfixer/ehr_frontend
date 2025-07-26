@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Portal Lekarza",
+    "subtitle": "Uzyskaj dostęp do swojego panelu medycznego",
+    "doctorId": "ID Lekarza",
+    "password": "Hasło",
+    "placeholder": {
+      "username": "Wprowadź swój ID lekarza",
+      "password": "Wprowadź swoje hasło"
+    },
+    "errors": {
+      "usernameRequired": "ID lekarza jest wymagane",
+      "passwordRequired": "Hasło jest wymagane"
+    },
+    "button": {
+      "signIn": "Zaloguj się"
+    },
+    "forgotPassword": "Zapomniałeś hasła?"
+  }
+}

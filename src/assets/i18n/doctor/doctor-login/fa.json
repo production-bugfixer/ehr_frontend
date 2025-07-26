@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "پورتال پزشک",
+    "subtitle": "به داشبورد پزشکی خود دسترسی پیدا کنید",
+    "doctorId": "شناسه پزشک",
+    "password": "رمز عبور",
+    "placeholder": {
+      "username": "شناسه پزشک خود را وارد کنید",
+      "password": "رمز عبور خود را وارد کنید"
+    },
+    "errors": {
+      "usernameRequired": "شناسه پزشک الزامی است",
+      "passwordRequired": "رمز عبور الزامی است"
+    },
+    "button": {
+      "signIn": "ورود"
+    },
+    "forgotPassword": "رمز عبور خود را فراموش کرده‌اید؟"
+  }
+}

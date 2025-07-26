@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Портал лікаря",
+    "subtitle": "Доступ до вашої медичної панелі",
+    "doctorId": "Ідентифікатор лікаря",
+    "password": "Пароль",
+    "placeholder": {
+      "username": "Введіть ідентифікатор лікаря",
+      "password": "Введіть свій пароль"
+    },
+    "errors": {
+      "usernameRequired": "Потрібен ідентифікатор лікаря",
+      "passwordRequired": "Потрібен пароль"
+    },
+    "button": {
+      "signIn": "Увійти"
+    },
+    "forgotPassword": "Забули пароль?"
+  }
+}

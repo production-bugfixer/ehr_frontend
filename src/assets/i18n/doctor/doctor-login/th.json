@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "พอร์ทัลของแพทย์",
+    "subtitle": "เข้าถึงแผงควบคุมทางการแพทย์ของคุณ",
+    "doctorId": "รหัสแพทย์",
+    "password": "รหัสผ่าน",
+    "placeholder": {
+      "username": "ป้อนรหัสแพทย์ของคุณ",
+      "password": "ป้อนรหัสผ่านของคุณ"
+    },
+    "errors": {
+      "usernameRequired": "ต้องระบุรหัสแพทย์",
+      "passwordRequired": "ต้องระบุรหัสผ่าน"
+    },
+    "button": {
+      "signIn": "เข้าสู่ระบบ"
+    },
+    "forgotPassword": "ลืมรหัสผ่านของคุณ?"
+  }
+}

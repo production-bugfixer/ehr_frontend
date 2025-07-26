@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Portail du Médecin",
+    "subtitle": "Accédez à votre tableau de bord médical",
+    "doctorId": "ID Médecin",
+    "password": "Mot de passe",
+    "placeholder": {
+      "username": "Entrez votre ID Médecin",
+      "password": "Entrez votre mot de passe"
+    },
+    "errors": {
+      "usernameRequired": "L'ID Médecin est requis",
+      "passwordRequired": "Le mot de passe est requis"
+    },
+    "button": {
+      "signIn": "Se connecter"
+    },
+    "forgotPassword": "Mot de passe oublié ?"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "医師ポータル",
+    "subtitle": "あなたの医療ダッシュボードにアクセス",
+    "doctorId": "医師ID",
+    "password": "パスワード",
+    "placeholder": {
+      "username": "医師IDを入力してください",
+      "password": "パスワードを入力してください"
+    },
+    "errors": {
+      "usernameRequired": "医師IDは必須です",
+      "passwordRequired": "パスワードは必須です"
+    },
+    "button": {
+      "signIn": "ログイン"
+    },
+    "forgotPassword": "パスワードをお忘れですか？"
+  }
+}

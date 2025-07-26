@@ -1,0 +1,10 @@
+<div class="login-container">
+  <div class="login-grid">
+    <div 
+      class="login-card" 
+      *ngFor="let module of modules" 
+      (click)="navigateTo(module.path)">
+      <span class="module-label">{{ module.labelKey | translate}}</span>
+    </div>
+  </div>
+</div>

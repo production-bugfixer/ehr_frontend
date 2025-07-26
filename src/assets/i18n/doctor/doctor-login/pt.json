@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Portal do Médico",
+    "subtitle": "Acesse seu painel médico",
+    "doctorId": "ID do Médico",
+    "password": "Senha",
+    "placeholder": {
+      "username": "Digite seu ID de médico",
+      "password": "Digite sua senha"
+    },
+    "errors": {
+      "usernameRequired": "O ID do médico é obrigatório",
+      "passwordRequired": "A senha é obrigatória"
+    },
+    "button": {
+      "signIn": "Entrar"
+    },
+    "forgotPassword": "Esqueceu sua senha?"
+  }
+}

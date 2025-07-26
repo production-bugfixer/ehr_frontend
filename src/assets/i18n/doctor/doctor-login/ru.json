@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Портал Врача",
+    "subtitle": "Доступ к вашей медицинской панели",
+    "doctorId": "ID Врача",
+    "password": "Пароль",
+    "placeholder": {
+      "username": "Введите ваш ID врача",
+      "password": "Введите ваш пароль"
+    },
+    "errors": {
+      "usernameRequired": "Требуется ID врача",
+      "passwordRequired": "Требуется пароль"
+    },
+    "button": {
+      "signIn": "Войти"
+    },
+    "forgotPassword": "Забыли пароль?"
+  }
+}

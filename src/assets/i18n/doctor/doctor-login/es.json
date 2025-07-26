@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Portal del Doctor",
+    "subtitle": "Accede a tu panel médico",
+    "doctorId": "ID del Doctor",
+    "password": "Contraseña",
+    "placeholder": {
+      "username": "Introduce tu ID de doctor",
+      "password": "Introduce tu contraseña"
+    },
+    "errors": {
+      "usernameRequired": "Se requiere ID del doctor",
+      "passwordRequired": "Se requiere contraseña"
+    },
+    "button": {
+      "signIn": "Iniciar sesión"
+    },
+    "forgotPassword": "¿Olvidaste tu contraseña?"
+  }
+}

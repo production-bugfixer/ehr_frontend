@@ -94,7 +94,12 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+    "glob": "**/*",
+    "input": "src/app/modules",
+    "output": "/assets/i18n/modules"
+  }
             ],
             "styles": [
               "src/styles.css"

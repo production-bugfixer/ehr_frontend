@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "의사 포털",
+    "subtitle": "의료 대시보드에 액세스하세요",
+    "doctorId": "의사 ID",
+    "password": "비밀번호",
+    "placeholder": {
+      "username": "의사 ID를 입력하세요",
+      "password": "비밀번호를 입력하세요"
+    },
+    "errors": {
+      "usernameRequired": "의사 ID는 필수입니다",
+      "passwordRequired": "비밀번호는 필수입니다"
+    },
+    "button": {
+      "signIn": "로그인"
+    },
+    "forgotPassword": "비밀번호를 잊으셨나요?"
+  }
+}

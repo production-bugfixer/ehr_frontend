@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "ڈاکٹرز پورٹل",
+    "subtitle": "اپنے میڈیکل ڈیش بورڈ تک رسائی حاصل کریں",
+    "doctorId": "ڈاکٹر آئی ڈی",
+    "password": "پاس ورڈ",
+    "placeholder": {
+      "username": "اپنا ڈاکٹر آئی ڈی درج کریں",
+      "password": "اپنا پاس ورڈ درج کریں"
+    },
+    "errors": {
+      "usernameRequired": "ڈاکٹر آئی ڈی ضروری ہے",
+      "passwordRequired": "پاس ورڈ ضروری ہے"
+    },
+    "button": {
+      "signIn": "سائن ان کریں"
+    },
+    "forgotPassword": "پاس ورڈ بھول گئے؟"
+  }
+}

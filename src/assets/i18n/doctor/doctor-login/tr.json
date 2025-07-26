@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Doktor Portalı",
+    "subtitle": "Tıbbi kontrol panelinize erişin",
+    "doctorId": "Doktor Kimliği",
+    "password": "Şifre",
+    "placeholder": {
+      "username": "Doktor kimliğinizi girin",
+      "password": "Şifrenizi girin"
+    },
+    "errors": {
+      "usernameRequired": "Doktor kimliği gereklidir",
+      "passwordRequired": "Şifre gereklidir"
+    },
+    "button": {
+      "signIn": "Giriş Yap"
+    },
+    "forgotPassword": "Şifrenizi mi unuttunuz?"
+  }
+}

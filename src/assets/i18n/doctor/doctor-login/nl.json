@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Doktersportaal",
+    "subtitle": "Toegang tot uw medisch dashboard",
+    "doctorId": "Dokters-ID",
+    "password": "Wachtwoord",
+    "placeholder": {
+      "username": "Voer uw dokters-ID in",
+      "password": "Voer uw wachtwoord in"
+    },
+    "errors": {
+      "usernameRequired": "Dokters-ID is verplicht",
+      "passwordRequired": "Wachtwoord is verplicht"
+    },
+    "button": {
+      "signIn": "Inloggen"
+    },
+    "forgotPassword": "Wachtwoord vergeten?"
+  }
+}

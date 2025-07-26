@@ -1,0 +1,9 @@
+{
+  "DOCTOR": "Médico",
+  "NURSING": "Enfermería",
+  "PATIENT": "Paciente",
+  "PHARMACY": "Farmacia",
+  "ADMINISTRATION": "Administración",
+  "HEALTH_TECHNICIAN": "Técnico de salud",
+  "PATHOLOGY": "Patología"
+}

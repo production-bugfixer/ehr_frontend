@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Portale del Medico",
+    "subtitle": "Accedi al tuo cruscotto medico",
+    "doctorId": "ID Medico",
+    "password": "Password",
+    "placeholder": {
+      "username": "Inserisci il tuo ID medico",
+      "password": "Inserisci la tua password"
+    },
+    "errors": {
+      "usernameRequired": "L'ID Medico è obbligatorio",
+      "passwordRequired": "La password è obbligatoria"
+    },
+    "button": {
+      "signIn": "Accedi"
+    },
+    "forgotPassword": "Hai dimenticato la password?"
+  }
+}

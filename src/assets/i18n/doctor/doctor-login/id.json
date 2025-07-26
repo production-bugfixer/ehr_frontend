@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Portal Dokter",
+    "subtitle": "Akses dasbor medis Anda",
+    "doctorId": "ID Dokter",
+    "password": "Kata Sandi",
+    "placeholder": {
+      "username": "Masukkan ID dokter Anda",
+      "password": "Masukkan kata sandi Anda"
+    },
+    "errors": {
+      "usernameRequired": "ID Dokter wajib diisi",
+      "passwordRequired": "Kata sandi wajib diisi"
+    },
+    "button": {
+      "signIn": "Masuk"
+    },
+    "forgotPassword": "Lupa kata sandi Anda?"
+  }
+}

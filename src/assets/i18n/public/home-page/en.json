@@ -1,0 +1,9 @@
+{
+  "DOCTOR": "Doctor",
+  "NURSING": "Nursing",
+  "PATIENT": "Patient",
+  "PHARMACY": "Pharmacy",
+  "ADMINISTRATION": "Administration",
+  "HEALTH_TECHNICIAN": "Health Technician",
+  "PATHOLOGY": "Pathology"
+}

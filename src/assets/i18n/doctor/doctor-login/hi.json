@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "डॉक्टर पोर्टल",
+    "subtitle": "अपना मेडिकल डैशबोर्ड एक्सेस करें",
+    "doctorId": "डॉक्टर आईडी",
+    "password": "पासवर्ड",
+    "placeholder": {
+      "username": "अपना डॉक्टर आईडी दर्ज करें",
+      "password": "अपना पासवर्ड दर्ज करें"
+    },
+    "errors": {
+      "usernameRequired": "डॉक्टर आईडी आवश्यक है",
+      "passwordRequired": "पासवर्ड आवश्यक है"
+    },
+    "button": {
+      "signIn": "साइन इन करें"
+    },
+    "forgotPassword": "क्या आप पासवर्ड भूल गए हैं?"
+  }
+}

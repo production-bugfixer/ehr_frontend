@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "ଡାକ୍ତର ପୋର୍ଟାଲ୍",
+    "subtitle": "ଆପଣଙ୍କର ଚିକିତ୍ସା ଡ୍ୟାସବୋର୍ଡ୍‌କୁ ପ୍ରବେଶ କରନ୍ତୁ",
+    "doctorId": "ଡାକ୍ତର ID",
+    "password": "ପାସୱାର୍ଡ",
+    "placeholder": {
+      "username": "ଆପଣଙ୍କର ଡାକ୍ତର ID ଦିଅନ୍ତୁ",
+      "password": "ଆପଣଙ୍କର ପାସୱାର୍ଡ ଦିଅନ୍ତୁ"
+    },
+    "errors": {
+      "usernameRequired": "ଡାକ୍ତର ID ଦରକାର",
+      "passwordRequired": "ପାସୱାର୍ଡ ଦରକାର"
+    },
+    "button": {
+      "signIn": "ସାଇନ୍ ଇନ୍"
+    },
+    "forgotPassword": "ପାସୱାର୍ଡ ଭୁଲିଗଲେ?"
+  }
+}

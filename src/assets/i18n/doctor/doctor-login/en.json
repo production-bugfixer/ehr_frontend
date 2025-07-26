@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Doctor's Portal",
+    "subtitle": "Access your medical dashboard",
+    "doctorId": "Doctor ID",
+    "password": "Password",
+    "placeholder": {
+      "username": "Enter your doctor ID",
+      "password": "Enter your password"
+    },
+    "errors": {
+      "usernameRequired": "Doctor ID is required",
+      "passwordRequired": "Password is required"
+    },
+    "button": {
+      "signIn": "Sign In"
+    },
+    "forgotPassword": "Forgot your password?"
+  }
+}

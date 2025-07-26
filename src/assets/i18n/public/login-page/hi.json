@@ -1,0 +1,9 @@
+{
+  "DOCTOR": "डॉक्टर",
+  "NURSING": "नर्सिंग",
+  "PATIENT": "मरीज़",
+  "PHARMACY": "फार्मेसी",
+  "ADMINISTRATION": "प्रशासन",
+  "HEALTH_TECHNICIAN": "स्वास्थ्य तकनीशियन",
+  "PATHOLOGY": "पैथोलॉजी"
+}
