@@ -40,8 +40,8 @@ export class AppComponent implements OnInit {
   "th"  // Thai
 ]);
 
-  selectedLanguage: string = 'en';
-  title = 'EHRwebView';
+  selectedLanguage: any;
+  title = 'Electronic Health Record';
 
   constructor(private translate: TranslateService) {
     // Add languages to translate service

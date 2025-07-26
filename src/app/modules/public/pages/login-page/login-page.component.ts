@@ -10,7 +10,6 @@ import { ComponentTranslateService } from 'src/app/translation/ComponenetTransla
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  iam:any="iam";
 hoveredRole:any;
   modules = [
   { labelKey: 'DOCTOR', path: '/doctor/login' },
@@ -29,11 +28,17 @@ hoveredRole:any;
 
   ngOnInit(): void {
     this.cts.load('/assets/i18n/public/pages/login-page/');
+     let lang:any=localStorage.getItem("lang");
+  const path = `assets/i18n/public/login-page/${lang}.json`;
+    this.http.get(path).subscribe((translations: any) => {
+      this.traslate.setTranslation(lang, translations, true);
+    });
     this.traslate.onLangChange.subscribe(event => {
-    this.loadComponentTranslations(event.lang);
+    this.loadComponentTranslations();
   });
   }
-  loadComponentTranslations(lang: string) {
+  loadComponentTranslations() {
+    let lang:any=localStorage.getItem("lang");
   const path = `assets/i18n/public/login-page/${lang}.json`;
     this.http.get(path).subscribe((translations: any) => {
       this.traslate.setTranslation(lang, translations, true);
