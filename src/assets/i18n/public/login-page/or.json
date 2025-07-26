@@ -1,9 +1,10 @@
 {
+  "iam": "ମୁଁ",
   "DOCTOR": "ଡାକ୍ତର",
-  "NURSING": "ନର୍ସିଙ୍ଗ",
+  "NURSING": "ନର୍ସ",
   "PATIENT": "ରୋଗୀ",
-  "PHARMACY": "ଔଷଧ ଦୋକାନ",
-  "ADMINISTRATION": "ପ୍ରଶାସନ",
-  "HEALTH_TECHNICIAN": "ସ୍ୱାସ୍ଥ୍ୟ ଟେକ୍ନିସିଆନ୍",
-  "PATHOLOGY": "ପ୍ୟାଥୋଲୋଜି"
+  "PHARMACY": "ଫାର୍ମାସିଷ୍ଟ",
+  "ADMINISTRATION": "ପ୍ରଶାସକ",
+  "HEALTH_TECHNICIAN": "ସ୍ୱାସ୍ଥ୍ୟ ପ୍ରଯୁକ୍ତିବିଦ୍",
+  "PATHOLOGY": "ପ୍ୟାଥୋଲୋଜିଷ୍ଟ"
 }

@@ -1,9 +1,10 @@
 {
+  "iam": "I am",
   "DOCTOR": "Doctor",
-  "NURSING": "Nursing",
+  "NURSING": "Nurse",
   "PATIENT": "Patient",
-  "PHARMACY": "Pharmacy",
-  "ADMINISTRATION": "Administration",
+  "PHARMACY": "Pharmacist",
+  "ADMINISTRATION": "Administrator",
   "HEALTH_TECHNICIAN": "Health Technician",
-  "PATHOLOGY": "Pathology"
+  "PATHOLOGY": "Pathologist"
 }

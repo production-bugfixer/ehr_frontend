@@ -10,7 +10,8 @@ import { ComponentTranslateService } from 'src/app/translation/ComponenetTransla
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-
+  iam:any="iam";
+hoveredRole:any;
   modules = [
   { labelKey: 'DOCTOR', path: '/doctor/login' },
   { labelKey: 'NURSING', path: '/nursing/login' },
@@ -42,4 +43,14 @@ export class LoginPageComponent implements OnInit {
   navigateTo(path: string): void {
     this.router.navigate([path]);
   }
+  onHover(labelKey: string) {
+    this.traslate.get(labelKey).subscribe(translated => {
+      this.hoveredRole = translated;
+    });
+  }
+
+  clearHover() {
+    this.hoveredRole = '';
+  }
+
 }

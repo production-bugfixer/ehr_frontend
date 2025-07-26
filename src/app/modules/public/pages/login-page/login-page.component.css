@@ -1,36 +1,69 @@
+/* Container layout */
 .login-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
   padding: 40px 20px;
+  background-color: #f9f9f9;
 }
 
+/* Inner wrapper for centering text and grid */
+.login-wrapper {
+  width: 100%;
+  max-width: 960px;
+  text-align: center;
+}
+
+/* Title (e.g., I am Doctor) */
+.role-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #2e7d32;
+  transition: color 0.3s;
+}
+
+/* Grid layout for cards */
 .login-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
   width: 100%;
-  max-width: 960px;
 }
 
+/* Individual card */
 .login-card {
   background-color: #e8f5e9;
   border: 2px solid #a5d6a7;
   border-radius: 12px;
   padding: 40px 20px;
-  text-align: center;
   font-size: 1.4rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transform: scale(1);
 }
 
+/* Hover effect for card */
 .login-card:hover {
   background-color: #c8e6c9;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  border-color: #81c784;
 }
 
+/* Label inside card */
 .module-label {
   display: block;
   color: #2e7d32;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for label */
+.login-card:hover .module-label {
+  color: #1b5e20;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }

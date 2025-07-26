@@ -1,0 +1,10 @@
+{
+  "iam": "Ik ben",
+  "DOCTOR": "Arts",
+  "NURSING": "Verpleegkundige",
+  "PATIENT": "Patiënt",
+  "PHARMACY": "Apotheker",
+  "ADMINISTRATION": "Beheerder",
+  "HEALTH_TECHNICIAN": "Gezondheidstechnicus",
+  "PATHOLOGY": "Patholoog"
+}

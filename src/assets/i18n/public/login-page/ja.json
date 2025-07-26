@@ -1,0 +1,10 @@
+{
+  "iam": "私は",
+  "DOCTOR": "医者",
+  "NURSING": "看護師",
+  "PATIENT": "患者",
+  "PHARMACY": "薬剤師",
+  "ADMINISTRATION": "管理者",
+  "HEALTH_TECHNICIAN": "医療技術者",
+  "PATHOLOGY": "病理学者"
+}

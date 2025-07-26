@@ -1,9 +1,10 @@
 {
+  "iam": "Yo soy",
   "DOCTOR": "Médico",
-  "NURSING": "Enfermería",
+  "NURSING": "Enfermera",
   "PATIENT": "Paciente",
-  "PHARMACY": "Farmacia",
-  "ADMINISTRATION": "Administración",
+  "PHARMACY": "Farmacéutico",
+  "ADMINISTRATION": "Administrador",
   "HEALTH_TECHNICIAN": "Técnico de salud",
-  "PATHOLOGY": "Patología"
+  "PATHOLOGY": "Patólogo"
 }

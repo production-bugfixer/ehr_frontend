@@ -1,0 +1,10 @@
+{
+  "iam": "Eu sunt",
+  "DOCTOR": "Doctor",
+  "NURSING": "Asistent medical",
+  "PATIENT": "Pacient",
+  "PHARMACY": "Farmacist",
+  "ADMINISTRATION": "Administrator",
+  "HEALTH_TECHNICIAN": "Tehnician sanitar",
+  "PATHOLOGY": "Patolog"
+}

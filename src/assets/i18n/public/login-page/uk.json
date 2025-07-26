@@ -1,0 +1,10 @@
+{
+  "iam": "Я",
+  "DOCTOR": "Лікар",
+  "NURSING": "Медсестра",
+  "PATIENT": "Пацієнт",
+  "PHARMACY": "Фармацевт",
+  "ADMINISTRATION": "Адміністратор",
+  "HEALTH_TECHNICIAN": "Медичний технік",
+  "PATHOLOGY": "Патолог"
+}

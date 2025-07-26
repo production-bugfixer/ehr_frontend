@@ -1,0 +1,10 @@
+{
+  "iam": "من هستم",
+  "DOCTOR": "پزشک",
+  "NURSING": "پرستار",
+  "PATIENT": "بیمار",
+  "PHARMACY": "داروساز",
+  "ADMINISTRATION": "مدیر",
+  "HEALTH_TECHNICIAN": "تکنسین سلامت",
+  "PATHOLOGY": "پاتولوژیست"
+}

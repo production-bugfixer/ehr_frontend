@@ -1,0 +1,10 @@
+{
+  "iam": "나는",
+  "DOCTOR": "의사",
+  "NURSING": "간호사",
+  "PATIENT": "환자",
+  "PHARMACY": "약사",
+  "ADMINISTRATION": "관리자",
+  "HEALTH_TECHNICIAN": "보건 기술자",
+  "PATHOLOGY": "병리학자"
+}

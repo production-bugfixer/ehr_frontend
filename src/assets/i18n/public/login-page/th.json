@@ -1,0 +1,10 @@
+{
+  "iam": "ฉันคือ",
+  "DOCTOR": "แพทย์",
+  "NURSING": "พยาบาล",
+  "PATIENT": "ผู้ป่วย",
+  "PHARMACY": "เภสัชกร",
+  "ADMINISTRATION": "ผู้ดูแลระบบ",
+  "HEALTH_TECHNICIAN": "ช่างเทคนิคด้านสุขภาพ",
+  "PATHOLOGY": "พยาธิแพทย์"
+}
