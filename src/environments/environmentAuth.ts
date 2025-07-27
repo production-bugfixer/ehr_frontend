@@ -12,6 +12,6 @@ export const environment = {
   },
   public:{
      forgetPasswordVerification:'/forgort-password/request',
-     reset:'/reset'
+     reset:'/forgort-password/reset'
   }
 };
