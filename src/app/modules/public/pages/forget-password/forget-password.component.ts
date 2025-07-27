@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ComponentTranslateService } from 'src/app/translation/ComponenetTranslationService';
@@ -18,82 +18,92 @@ export class ForgetPasswordComponent implements OnInit {
   loading = false;
   errorMessage = '';
   showResetFields = false;
-
+requestId:any='';
   constructor(
     private router: Router,
     private translate: TranslateService,
     private cts: ComponentTranslateService,
     private http: HttpClient,
     private fb: FormBuilder,
-    private httpApi:CommonApiCallerService
+    private httpApi: CommonApiCallerService
   ) {
-    this.forgotPasswordForm = this.fb.group({
-      ehrId: ['', [Validators.required, Validators.email]],
-      verificationMethod: ['email'],
-      otp: [''],
-      newPassword: ['',],
-      confirmPassword: ['',]
-    }, { validator: this.passwordMatchValidator });
-
-  
+    this.forgotPasswordForm = this.fb.group(
+      {
+        ehrId: ['', [Validators.required, Validators.email]],
+        verificationMethod: ['email'],
+        otp: [''],
+        newPassword: [''],
+        confirmPassword: ['']
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
   ngOnInit(): void {
-    this.cts.load('/assets/i18n/public/forget-password/');
-    let lang: any = localStorage.getItem("lang");
+    this.loadTranslations();
+    this.translate.onLangChange.subscribe(() => this.loadTranslations());
+  }
+
+  private loadTranslations(): void {
+    const lang = localStorage.getItem('lang') || 'en';
     const path = `assets/i18n/public/forget-password/${lang}.json`;
     this.http.get(path).subscribe((translations: any) => {
       this.translate.setTranslation(lang, translations, true);
     });
-    this.translate.onLangChange.subscribe(event => {
-      this.loadComponentTranslations();
-    });
   }
 
-  passwordMatchValidator(formGroup: FormGroup) {
-    const password = formGroup.get('newPassword')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
+  private passwordMatchValidator(group: AbstractControl): { [key: string]: any } | null {
+    const password = group.get('newPassword')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
   }
 
-  loadComponentTranslations() {
-    let lang: any = localStorage.getItem("lang");
-    const path = `assets/i18n/public/forget-password/${lang}.json`;
-    this.http.get(path).subscribe((translations: any) => {
-      this.translate.setTranslation(lang, translations, true);
-    });
-  }
-
-  
-
-  onVerificationMethodChange(method: 'email' | 'phone') {
+  onVerificationMethodChange(method: 'email' | 'phone'): void {
     this.verificationMethod = method;
     this.forgotPasswordForm.patchValue({ verificationMethod: method });
   }
 
-  requestOTP() {
+  requestOTP(): void {
     if (this.forgotPasswordForm.invalid) {
       this.forgotPasswordForm.markAllAsTouched();
       return;
     }
 
-      this.loading = true;
+    this.loading = true;
     this.errorMessage = '';
-let payLoad={
-  ehrId:this.forgotPasswordForm.get("ehrId")?.value,
-  verificationMethod:this.forgotPasswordForm.get("verificationMethod")?.value,
-  phone:""
-}
-this.httpApi.triggerVerification(payLoad).subscribe();
 
+    const payload = {
+      ehrId: this.forgotPasswordForm.get('ehrId')?.value,
+      verificationMethod: this.verificationMethod,
+      phone: ''
+    };
+
+    this.httpApi.triggerVerification(payload).subscribe(
+      (res: any) => {
+        this.loading = false;
+        if (res?.requestId) {
+          this.verificationSent = true;
+          this.showResetFields = true;
+          this.requestId=res?.requestId
+        } else {
+          this.errorMessage = this.translate.instant('ERROR.NO_REQUEST_ID');
+        }
+      },
+      (error:any) => {
+        this.loading = false;
+        this.errorMessage = this.translate.instant('ERROR.SENDING_OTP');
+        console.error('OTP request error:', error);
+      }
+    );
   }
 
-  resetPassword() {
-    if (this.forgotPasswordForm.invalid || this.forgotPasswordForm.errors?.mismatch) {
+  resetPassword(): void {
+    if (this.forgotPasswordForm.invalid || this.forgotPasswordForm.errors?.['mismatch']) {
       this.forgotPasswordForm.markAllAsTouched();
       return;
     }
 
-  
+    // TODO: Implement reset logic here
+    console.log('Reset password flow goes here');
   }
 }

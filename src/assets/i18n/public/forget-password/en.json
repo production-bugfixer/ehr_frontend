@@ -23,6 +23,7 @@
     "CONFIRM_PASSWORD_PLACEHOLDER": "Re-enter your new password",
     "CONFIRM_PASSWORD_REQUIRED": "Please confirm your password",
     "PASSWORDS_MISMATCH": "Passwords do not match",
-    "RESET_PASSWORD": "Reset Password"
+    "RESET_PASSWORD": "Reset Password",
+    "REQUEST_ID": "Your Request ID"
   }
 }
