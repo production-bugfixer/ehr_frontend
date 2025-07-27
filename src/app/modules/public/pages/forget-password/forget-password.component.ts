@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ComponentTranslateService } from 'src/app/translation/ComponenetTranslationService';
 import { CommonApiCallerService } from '../../common-api-caller.service';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forget-password',
@@ -25,7 +26,8 @@ requestId:any='';
     private cts: ComponentTranslateService,
     private http: HttpClient,
     private fb: FormBuilder,
-    private httpApi: CommonApiCallerService
+    private httpApi: CommonApiCallerService,
+    private toaster:ToastrService
   ) {
     this.forgotPasswordForm = this.fb.group(
       {
@@ -97,13 +99,33 @@ requestId:any='';
     );
   }
 
-  resetPassword(): void {
-    if (this.forgotPasswordForm.invalid || this.forgotPasswordForm.errors?.['mismatch']) {
-      this.forgotPasswordForm.markAllAsTouched();
-      return;
-    }
-
-    // TODO: Implement reset logic here
-    console.log('Reset password flow goes here');
+ resetPassword(): void {
+  if (this.forgotPasswordForm.invalid || this.forgotPasswordForm.errors?.['mismatch']) {
+    this.forgotPasswordForm.markAllAsTouched();
+    return;
   }
+
+  this.loading = true;
+  this.errorMessage = '';
+
+  const payload = {
+    requestId: this.requestId,
+    otp: this.forgotPasswordForm.get('otp')?.value,
+    newPassword: this.forgotPasswordForm.get('newPassword')?.value
+  };
+
+  this.httpApi.resetPassword(payload).subscribe(
+    (res: any) => {
+      this.loading = false;
+      // Success handling: You can show a success message or navigate
+      //alert(this.translate.instant('FORGET_PASSWORD.PASSWORD_RESET_SUCCESS'));
+      this.toaster.success(this.translate.instant('FORGET_PASSWORD.PASSWORD_RESET_SUCCESS'))
+    },
+    (error: any) => {
+      this.loading = false;
+      this.errorMessage = this.translate.instant('ERROR.RESETTING_PASSWORD');
+      console.error('Password reset error:', error);
+    }
+  );
+}
 }

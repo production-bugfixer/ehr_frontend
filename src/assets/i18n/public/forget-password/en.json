@@ -24,6 +24,7 @@
     "CONFIRM_PASSWORD_REQUIRED": "Please confirm your password",
     "PASSWORDS_MISMATCH": "Passwords do not match",
     "RESET_PASSWORD": "Reset Password",
-    "REQUEST_ID": "Your Request ID"
+    "REQUEST_ID": "Your Request ID",
+    "PASSWORD_RESET_SUCCESS":"Password Rest completed Please Login Again"
   }
 }
