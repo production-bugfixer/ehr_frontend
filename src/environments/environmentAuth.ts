@@ -11,6 +11,7 @@ export const environment = {
     external: '/auth/v1/ex'
   },
   public:{
-     forgetPasswordVerification:'/forgort-password/request'
+     forgetPasswordVerification:'/forgort-password/request',
+     reset:'/reset'
   }
 };

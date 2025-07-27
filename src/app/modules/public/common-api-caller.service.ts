@@ -22,4 +22,10 @@ private getHeaders(): HttpHeaders {
       headers: this.getHeaders()
     });
   }
+  resetPassword(payLoad:any):any{
+    const url = this.apiUrl + environment.public.reset
+     return this.http.post<any>(url, payLoad, {
+      headers: this.getHeaders()
+    });
+  }
 }
