@@ -9,5 +9,8 @@ export const environment = {
     technician: '/auth/v1/technician',
     admin: '/auth/v1/adminstaff',
     external: '/auth/v1/ex'
+  },
+  public:{
+     forgetPasswordVerification:'/forgort-password/request'
   }
 };

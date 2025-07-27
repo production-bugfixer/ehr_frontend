@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
     const requestedUrl = state.url; // e.g., /doctor/dashboard
 
     const requestedModule = requestedUrl.split('/')[1]?.toLowerCase();
-    const isLoginPage = requestedUrl.endsWith('/login');
+    const isLoginPage = requestedUrl.endsWith('/login')||requestedUrl.endsWith('/forget-password');
 
     // ✅ Allow all module login pages without authentication
     if (isLoginPage) {

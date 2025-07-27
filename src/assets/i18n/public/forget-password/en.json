@@ -1,0 +1,28 @@
+{
+  "FORGET_PASSWORD": {
+    "TITLE": "Forgot Password",
+    "EHR_ID": "EHR ID",
+    "EHR_ID_PLACEHOLDER": "Enter your EHR ID",
+    "EHR_ID_REQUIRED": "EHR ID is required",
+    "EHR_ID_INVALID": "Please enter a valid email address",
+    "PHONE": "Phone Number",
+    "PHONE_PLACEHOLDER": "Enter your phone number",
+    "PHONE_REQUIRED": "Phone number is required",
+    "PHONE_INVALID": "Please enter a valid phone number",
+    "VERIFICATION_METHOD": "Verification Method",
+    "EMAIL": "Email",
+    "SEND_OTP": "Send OTP",
+    "OTP": "OTP Code",
+    "OTP_PLACEHOLDER": "Enter the OTP you received",
+    "OTP_REQUIRED": "OTP is required",
+    "NEW_PASSWORD": "New Password",
+    "NEW_PASSWORD_PLACEHOLDER": "Enter new password",
+    "PASSWORD_REQUIRED": "Password is required",
+    "PASSWORD_MIN_LENGTH": "Password must be at least 8 characters",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Re-enter your new password",
+    "CONFIRM_PASSWORD_REQUIRED": "Please confirm your password",
+    "PASSWORDS_MISMATCH": "Passwords do not match",
+    "RESET_PASSWORD": "Reset Password"
+  }
+}

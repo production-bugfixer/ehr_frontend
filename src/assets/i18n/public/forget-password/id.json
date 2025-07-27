@@ -1,0 +1,10 @@
+{
+  "iam": "Saya adalah",
+  "DOCTOR": "Dokter",
+  "NURSING": "Perawat",
+  "PATIENT": "Pasien",
+  "PHARMACY": "Apoteker",
+  "ADMINISTRATION": "Administrator",
+  "HEALTH_TECHNICIAN": "Teknisi Kesehatan",
+  "PATHOLOGY": "Ahli Patologi"
+}

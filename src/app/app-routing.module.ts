@@ -11,16 +11,13 @@ const routes: Routes = [
   { path: 'pharmacy', loadChildren: () => import('./modules/pharmacy/pharmacy.module').then(m => m.PharmacyModule), canActivate: [AuthGuard] },
   { path: 'health-technician', loadChildren: () => import('./modules/health-technician/health-technician.module').then(m => m.HealthTechnicianModule), canActivate: [AuthGuard] },
   { path: 'pathology', loadChildren: () => import('./modules/pathology/pathology.module').then(m => m.PathologyModule), canActivate: [AuthGuard] },
-    // Default route: redirect to public/login
   { path: '', redirectTo: 'public', pathMatch: 'full' },
-
-  // Wildcard route: fallback in case of undefined paths
   { path: '**', redirectTo: 'public' }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

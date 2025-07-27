@@ -1,0 +1,10 @@
+{
+  "iam": "Ben",
+  "DOCTOR": "Doktor",
+  "NURSING": "Hemşire",
+  "PATIENT": "Hasta",
+  "PHARMACY": "Eczacı",
+  "ADMINISTRATION": "Yönetici",
+  "HEALTH_TECHNICIAN": "Sağlık teknisyeni",
+  "PATHOLOGY": "Patolog"
+}

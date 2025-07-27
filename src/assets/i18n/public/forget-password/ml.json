@@ -1,0 +1,10 @@
+{
+  "iam": "ഞാൻ",
+  "DOCTOR": "ഡോക്ടർ",
+  "NURSING": "നഴ്സ്",
+  "PATIENT": "രോഗി",
+  "PHARMACY": "ഫാർമസിസ്റ്റ്",
+  "ADMINISTRATION": "അഡ്മിനിസ്ട്രേറ്റർ",
+  "HEALTH_TECHNICIAN": "ഹെൽത്ത് ടെക്‌നീഷ്യൻ",
+  "PATHOLOGY": "പാത്തോളജിസ്റ്റ്"
+}

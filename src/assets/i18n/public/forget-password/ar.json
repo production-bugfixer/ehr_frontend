@@ -1,0 +1,10 @@
+{
+  "iam": "أنا",
+  "DOCTOR": "طبيب",
+  "NURSING": "ممرضة",
+  "PATIENT": "مريض",
+  "PHARMACY": "صيدلي",
+  "ADMINISTRATION": "إداري",
+  "HEALTH_TECHNICIAN": "فني صحي",
+  "PATHOLOGY": "أخصائي أمراض"
+}

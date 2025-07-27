@@ -5,17 +5,24 @@ import { PublicRoutingModule } from './public-routing.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonApiCallerService } from './common-api-caller.service';
 
 @NgModule({
   declarations: [
     LoginPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
     PublicRoutingModule,
-    TranslateModule 
+    TranslateModule ,
+    ReactiveFormsModule
   ],
-  providers:[]
+  providers:[CommonApiCallerService]
 })
 export class PublicModule { }

@@ -72,4 +72,7 @@ export class DoctorLoginComponent implements OnInit {
       }
     });
   }
+  navigate(path:any){
+    this.router.navigate([path]);
+  }
 }

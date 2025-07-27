@@ -41,7 +41,7 @@ select {
 /* Make sure router-outlet has proper spacing */
 router-outlet {
   display: block;
-  padding: 20px;
+  padding: 1px;
 }
 /* Reset and structure */
 html, body {
@@ -53,7 +53,7 @@ html, body {
 /* Make sure router content doesn't get hidden behind footer */
 router-outlet {
   display: block;
-  margin-bottom: 60px; /* Footer height buffer */
+  margin-bottom: 0px; /* Footer height buffer */
 }
 
 /* Fixed footer */

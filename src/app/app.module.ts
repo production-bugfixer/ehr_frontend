@@ -15,10 +15,10 @@ import { LanguageInterceptor } from './interceptors/language.interceptor';
 
 
 
-
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   
   ],
   imports: [
     BrowserModule,

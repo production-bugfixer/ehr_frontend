@@ -1,0 +1,10 @@
+{
+  "iam": "我是",
+  "DOCTOR": "医生",
+  "NURSING": "护士",
+  "PATIENT": "病人",
+  "PHARMACY": "药剂师",
+  "ADMINISTRATION": "管理员",
+  "HEALTH_TECHNICIAN": "健康技术员",
+  "PATHOLOGY": "病理学家"
+}
