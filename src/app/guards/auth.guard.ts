@@ -22,8 +22,8 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    const token = this.localSession.getItem('access_token');
-    const userType = this.localSession.getItem('userType');
+    let stringObjs:any=localStorage.getItem("loginInfo");
+    let loginInfo:any=JSON.parse(stringObjs);
     const requestedUrl = state.url; // e.g., /doctor/dashboard
 
     const requestedModule = requestedUrl.split('/')[1]?.toLowerCase();
@@ -35,16 +35,16 @@ export class AuthGuard implements CanActivate {
     }
 
     // 🔒 If token or userType is missing, send to /public
-    if (!token || !userType) {
+    if (!loginInfo?.userType) {
       return this.router.parseUrl('/public');
     }
 
     // ✅ If userType matches requested module, allow
-    if (userType.toLowerCase() === requestedModule) {
+    if (loginInfo?.userType) {
       return true;
     }
 
     // 🔄 Else redirect to correct module's login
-    return this.router.parseUrl(`/${userType.toLowerCase()}/login`);
+    return this.router.parseUrl(`/${loginInfo?.userType.toLowerCase()}/login`);
   }
 }

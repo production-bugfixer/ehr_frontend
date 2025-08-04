@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { ComponentTranslateService } from 'src/app/translation/ComponenetTranslationService';
 import { HttpClient } from '@angular/common/http';
+import { LocalSessionServiceService } from 'src/app/services/local-session-service.service';
+import { TokenTimerService } from 'src/app/services/token-timer.service';
 
 
 @Component({
@@ -23,7 +25,11 @@ export class DoctorLoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toaster:ToastrService,
-    private translate:TranslateService,private cts: ComponentTranslateService,private http: HttpClient
+    private translate:TranslateService,
+    private cts: ComponentTranslateService,
+    private http: HttpClient,
+    private storage:LocalSessionServiceService,
+    private tokenTimerService:TokenTimerService
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -60,15 +66,47 @@ export class DoctorLoginComponent implements OnInit {
     };
 
     this.authService.doctorLogin(payload).subscribe({
+      
       next: (response:any) => {
-        this.isLoading = false;
-        this.toaster.success(response?.toasterMessage)
+           /**
+                 * {
+            "status": true,
+            "notificationMessage": "Login successful.",
+            "message": "Login successful.",
+            "errorCode": null,
+            "exceptionMessage": null,
+            "language": "en",
+            "timestamp": "2025-07-29 22:57:03",
+            "data": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkcnNtaXRoIiwiZXhwIjoxNzUzODQ2MDIzLCJpYXQiOjE3NTM4MTAwMjMsImVtYWlsIjoiYW5pbWVzaHNhbWFudGExNzExQGdtYWlsLmNvbSJ9.Aa75n90KC-Mo540hGkFl6rgMVZGidzljzL9lUAqHRro"
+        }
+                 */
+                this.isLoading = false;
+                if(response?.data?.notificationMessage && response?.data?.data){
+                   this.toaster.success(response?.data?.notificationMessage);
+                   localStorage.setItem("user-token",response?.data?.data);
+                   localStorage.setItem("loginInfo",JSON.stringify({"token":response?.data?.data,"userType":"DOCTOR"}));
+                   localStorage.setItem("tokenTime", Date.now().toString());
+                   this.tokenTimerService.onLogin()
+                   this.router.navigate(['/doctor/dashboard']);
+                }
+                
+        
+        
       },
       error: (error:any) => {
+        if (typeof error === 'function') {
+    error = error();
+  }
+ 
+        let data=error?.error;
         this.isLoading = false;
-        this.errorMessage = error.error?.message || 'Login failed. Please try again.';
-        console.log(error)
-        this.toaster.error(this.errorMessage)
+        if(data?.notificationMessage){
+           this.toaster.error(data?.notificationMessage)
+        }
+        this.errorMessage = data?.notificationMessage || 'Login failed. Please try again.';
+        let lang=localStorage.getItem("lang")||'';
+    localStorage.clear();
+    localStorage.setItem('lang',lang);
       }
     });
   }

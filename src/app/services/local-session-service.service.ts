@@ -52,6 +52,8 @@ export class LocalSessionServiceService {
   }
 
   public clearAllSession(): void {
+   let lang=localStorage.getItem("lang")||'';
     localStorage.clear();
+    localStorage.setItem('lang',lang);
   }
 }

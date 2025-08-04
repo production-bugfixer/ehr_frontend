@@ -2,24 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environmentAuth';
 import { Observable, throwError } from 'rxjs';
+import { decryptJSON } from 'src/app/interceptors/decryptJson';
+import { map } from 'rxjs/operators';
 
-interface LoginResponse {
-  token: string;
-  user: {
-    id: string;
-    username: string;
-    email: string;
-    userType: 'DOCTOR';
-  };
-}
 
-interface LoginPayload {
-  userType: 'DOCTOR';
-  username: string;
-  email: string;
-  password: string;
-  phoneNumber: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +23,16 @@ export class AuthService {
     });
   }
 
-  doctorLogin(payload: LoginPayload): Observable<LoginResponse> {
+  doctorLogin(payload:any): Observable<any> {
     const url = this.apiUrl + environment.authEndpoints.doctor;
-    return this.http.post<LoginResponse>(url, payload, {
+    return this.http.post<any>(url, payload, {
       headers: this.getHeaders()
-    });
+    }).pipe(
+      map((response:any) => {
+        response.data=JSON.parse(response.data);
+        return response;
+      })
+    );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

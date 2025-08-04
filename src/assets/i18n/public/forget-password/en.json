@@ -26,5 +26,9 @@
     "RESET_PASSWORD": "Reset Password",
     "REQUEST_ID": "Your Request ID",
     "PASSWORD_RESET_SUCCESS":"Password Rest completed Please Login Again"
-  }
+    
+  },
+"ERROR":{
+  "RESETTING_PASSWORD":"Something went wrong."
+}
 }

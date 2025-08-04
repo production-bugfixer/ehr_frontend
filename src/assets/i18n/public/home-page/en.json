@@ -5,5 +5,9 @@
   "PHARMACY": "Pharmacy",
   "ADMINISTRATION": "Administration",
   "HEALTH_TECHNICIAN": "Health Technician",
-  "PATHOLOGY": "Pathology"
+  "PATHOLOGY": "Pathology",
+  "NETWORSTATUS":{
+  "OFFLINE_MESSAGE": "You are offline. Changes won’t be saved until connection is restored.",
+  "OFFLINE_TITLE": "Offline"
+}
 }

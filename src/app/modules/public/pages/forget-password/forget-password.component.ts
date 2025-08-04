@@ -6,7 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ComponentTranslateService } from 'src/app/translation/ComponenetTranslationService';
 import { CommonApiCallerService } from '../../common-api-caller.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-
+import { switchMap, catchError, tap, filter } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
@@ -19,6 +20,8 @@ export class ForgetPasswordComponent implements OnInit {
   loading = false;
   errorMessage = '';
   showResetFields = false;
+  private requestOtp$ = new Subject<void>();
+  private resetPassword$ = new Subject<void>();
 requestId:any='';
   constructor(
     private router: Router,
@@ -44,6 +47,44 @@ requestId:any='';
   ngOnInit(): void {
     this.loadTranslations();
     this.translate.onLangChange.subscribe(() => this.loadTranslations());
+     this.requestOtp$
+      .pipe(
+        filter(() => this.forgotPasswordForm.valid),
+        switchMap(() =>
+          this.httpApi.triggerVerification(this.forgotPasswordForm.value).pipe(
+            tap((res:any) => {
+               this.verificationSent = true;
+          this.showResetFields = true;
+              this.requestId = res?.requestId || '';
+            }),
+            catchError(err => {
+              this.errorMessage = 'OTP sending failed';
+              return of(null);
+            })
+          )
+        )
+      )
+      .subscribe();
+
+    // ✅ Handle Password Reset
+    this.resetPassword$
+      .pipe(
+        filter(() => this.forgotPasswordForm.valid),
+        switchMap(() =>
+          this.httpApi.resetPassword(this.forgotPasswordForm.value).pipe(
+            tap(() => {
+              this.showResetFields = false;
+              this.errorMessage = '';
+              alert('Password reset successful');
+            }),
+            catchError(err => {
+              this.errorMessage = 'Reset failed';
+              return of(null);
+            })
+          )
+        )
+      )
+      .subscribe();
   }
 
   private loadTranslations(): void {
@@ -64,8 +105,10 @@ requestId:any='';
     this.verificationMethod = method;
     this.forgotPasswordForm.patchValue({ verificationMethod: method });
   }
-
-  requestOTP(): void {
+ requestOTP(): void {
+    this.requestOtp$.next();
+  }
+  requestOTP1(): void {
     if (this.forgotPasswordForm.invalid) {
       this.forgotPasswordForm.markAllAsTouched();
       return;
@@ -83,6 +126,7 @@ requestId:any='';
     this.httpApi.triggerVerification(payload).subscribe(
       (res: any) => {
         this.loading = false;
+        this.requestId=''
         if (res?.requestId) {
           this.verificationSent = true;
           this.showResetFields = true;
