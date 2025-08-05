@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   selectedLanguage: any;
   title = 'Electronic Health Record';
 
-  // Popup binding
+ 
   popupVisible = false;
   popupType = 'info';
   popupTitle = '';
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     this.translate.use(this.selectedLanguage);
     console.log(`[AppComponent] Initialized with language: ${this.selectedLanguage}`);
 
-    // Listen for popup trigger from TokenTimerService
+    
     this.timer.popupState$.subscribe((data: PopupData) => {
       console.log('[AppComponent] Popup trigger received from TokenTimerService:', data);
       
@@ -59,11 +59,11 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // Popup actions
+ 
   onPopupConfirm() {
     console.log('[AppComponent] Popup confirmed (OK clicked). Resetting session timer.');
     this.popupVisible = false;
-    this.timer.confirmContinueSession() // More appropriate than handleUnauthorized
+    this.timer.confirmContinueSession() 
   }
 
   onPopupCancel() {

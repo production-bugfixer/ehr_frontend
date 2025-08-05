@@ -15,9 +15,7 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
     private resources: TranslateResource[]
   ) {}
 
-  /**
-   * Gets the translations from the server
-   */
+ 
   getTranslation(lang: string): Observable<any> {
     return forkJoin(
       this.resources.map(config => {
@@ -32,9 +30,7 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
     );
   }
 
-  /**
-   * Deep merges two objects
-   */
+  
   private mergeDeep(target: any, source: any): any {
     if (typeof target !== 'object' || typeof source !== 'object') {
       return source;
