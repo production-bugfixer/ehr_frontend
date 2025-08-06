@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  //baseApiUrl: 'http://147.79.66.20:9090/authenticate',
-baseApiUrl:'http://localhost:2000',
+  baseApiUrl: 'http://147.79.66.20:9090/authenticate',
+//baseApiUrl:'http://localhost:2000',
   authEndpoints: {
     doctor: '/auth/v1/doctor',
     patient: '/auth/v1/patient',
