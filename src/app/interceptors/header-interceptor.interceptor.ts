@@ -8,30 +8,29 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
+
 
 @Injectable()
 export class HeaderInterceptorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('user-token');
+  const token = localStorage.getItem('user-token');
 
-    
-    const authReq = req.clone({
+  let authReq = req;
+  if(token != null){
+    authReq = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${token}`)
     });
-
-    return next.handle(authReq).pipe(
-      catchError((err: HttpErrorResponse) => {
-        if (err.status === 401 || err.status === 403) {
-          console.error('[JwtInterceptor] Unauthorized - redirecting to login.');
-         
-        
-        }
-        return throwError(() => err);
-      })
-    );
+  }
+  return next.handle(authReq).pipe(
+    catchError((err: HttpErrorResponse) => {
+      if (err.status === 401 || err.status === 403) {
+        console.error('[JwtInterceptor] Unauthorized - redirecting to login.');
+      }
+      return throwError(() => err);
+    })
+  );
   }
 }
